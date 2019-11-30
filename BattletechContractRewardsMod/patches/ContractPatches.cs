@@ -14,12 +14,4 @@ namespace BattletechContractRewardsMod {
             __instance.BattleTechGame.Simulation.GetInterruptQueue().AddInterrupt(rewardsPopupEntry, playImmediately);
         }
     }
-
-    [HarmonyPatch(typeof(Contract), "GenerateSalvage")]
-    public static class Contract_GenerateSalvage {
-        public static void Prefix(Contract __instance) {
-            Mod.Logger.Info("======= Generating salvage =======");
-            //__instance.BattleTechGame.Simulation.GetInterruptQueue().QueueRewardsPopup("itemCollection_loot_Item_rare");
-        }
-    }
 }
