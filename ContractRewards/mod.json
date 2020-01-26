@@ -1,7 +1,7 @@
 {
     "Name": "Contract rewards",
     "Enabled": true,
-    "Version": "0.0.0",
+    "Version": "0.0.1.0",
     "Description": "Provides Flashpoint-style rewards after all generic contracts.",
     "Author": "Elliot Crosby-McCullough",
     "Website": "https://github.com/elliotcm/BattletechContractRewardsMod",

@@ -13,10 +13,35 @@ namespace BattletechContractRewardsMod {
             if (shouldGiveRewards(__instance)) {
                 Mod.Logger.Info("Providing under-par reward");
 
-                SimGameInterruptManager.RewardsPopupEntry rewardsPopupEntry = new SimGameInterruptManager.RewardsPopupEntry("itemCollection_loot_Item_rare");
+                SimGameInterruptManager.RewardsPopupEntry rewardsPopupEntry = new SimGameInterruptManager.RewardsPopupEntry(selectReward(__instance));
                 bool playImmediately = false;
                 __instance.BattleTechGame.Simulation.GetInterruptQueue().AddInterrupt(rewardsPopupEntry, playImmediately);
             }
+        }
+
+        private static string selectReward(Contract contract) {
+            float underParBy = amountUnderPar(contract);
+            float difficulty = contract.Difficulty;
+
+            if (difficulty >= 5) {
+                if (underParBy >= 1.5) {
+                    return "itemCollection_loot_ItemTriple_SLDF";
+                } else if (underParBy >= 1) {
+                    return "itemCollection_loot_ItemDouble_SLDF";
+                } else if (underParBy > 0) {
+                    return "itemCollection_loot_Item_SLDF";
+                }
+            } else if (difficulty >= 4) {
+                return "itemCollection_loot_ItemDouble_rare";
+            } else if (difficulty >= 3) {
+                return "itemCollection_loot_Item_rare";
+            } else if (difficulty >= 2) {
+                return "itemCollection_loot_ItemTriple_uncommon";
+            } else if (difficulty >= 1) {
+                return "itemCollection_loot_Item_uncommon";
+            }
+            
+            return null;
         }
 
         private static bool shouldGiveRewards(Contract contract) {
